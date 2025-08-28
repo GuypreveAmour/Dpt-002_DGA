@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Generateur de mot de pass</title>
+<style type="text/css" media="all">
+body{
+    justify-items: center;
+}
+h1{
+    background-color: rgba(100,200,300,0.5);
+    padding: 10px;
+    color: #45f;
+    border-radius: 100px;
+    text-align: center;
+    width: 70%;
+    justify-self: center;
+    box-shadow: inset 10px 10px 0px #0a0, inset -10px 10px 0px #f00, inset 10px -10px 0px #00f, inset -10px -10px 0px #00f, 0px 0px 10px rgba(0,0,0,0.8);
+}
+button{
+    height: 30px;
+    font-size: 20px;
+    border-radius: 5px;
+}
+#plus{
+    width: 30px;
+    background-color: #00ff00;
+}
+#moins{
+    width: 30px;
+    background-color: #f00;
+    color: #fff;
+}
+#plus10{
+    background-color: #00ff00;
+}
+#moins10{
+    background-color: #f00;
+    color: #fff;
+}
+#taille{
+    width: 100px;
+    background-color: #fff;
+    font-weight: bold;
+    color: blue;
+    
+}
+.label{
+    text-align: center;
+    font-size: 18px;
+    font-family: Times New Roman;
+    letter-spacing: 5px;
+}
+#container{
+    border: ;
+    padding: 5px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0px 2px 5px;
+    width: 80%;
+    height: 20px;
+    overflow: scroll;
+    font-family: Times New Roman ;
+}
+.class-taille{
+    padding: 5px 10px;
+    padding-bottom: 40px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+    border-radius: 10px;
+}
+.Generer{
+    border: none;
+    box-shadow: 0px 3px 0px 1px rgba(0,0,0,0.7), inset 0px 0px 5px #000;
+    color: #fff;
+    font-family: Times New Roman;
+    background-color: rgba(0,50,250,0.9);
+}
+.Generer:active{
+    transform: translateY(3px);
+    box-shadow: 0px 1px 3px 1px ;
+}
+.Generer + p{
+    font-family: Times New Roman;
+    letter-spacing: 5px;
+    font-weight: bolder;
+}
+</style>
+</head>
+<body>
+<h1>PassWord Generator</h1>
+<hr />
+<div class="class-taille">
+<p class="label">____Taille____</p>
+<button id="moins10">–10</button>
+<button id="moins">–</button>
+<button name="Taille" id="taille">4
+</button>
+<button id="plus">+</button>
+<button id="plus10">+10</button>   
+</div>
+
+<br />
+<button class="Generer" onclick="Generer()">Generate
+</button>
+<p>____PassWord____ </p>
+<p id="container"></p>
+<script type="text/javascript" charset="utf-8">
+//Liste Des Caracters
+
+let list = ['a', 'b', 'c', 'z', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'q', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'w', 'x', 'v', 'n', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'A', 'Z', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'Q', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'W', 'X', 'C', 'V', 'B', 'N', '.', '@', '#', '€', '_', '&', '-', '+', '(', ')', '/', '*', ':', '!', '?', '~', '%', '$', '£', '¥', '¢', '©', '®', '¡', ']', '[', '—', '∅', '±', '∆','dga','à','â','æ','á','ä','ã','å','ā','ª','ê','é','è','ë','ē','ę','ė','ÿ','ù','û','ü','ū','ú','ũ','î','ï','ì','í','ī','ĩ','į','ô','œ','ö','ò','ó','õ','ø','ō','º','ç','č','ć','¿','₹','§','Ω','μ','Π','π','·']
+console.log(list.length)  //92
+
+//La Taille Du mot de passe
+let Taille = parseInt(document.querySelector("#taille").textContent);
+
+//Incrementer la Taille de un(1)
+document.querySelector('#plus').addEventListener('click', ()=> {
+Taille += 1
+document.querySelector('#taille').textContent = Taille
+console.log(Taille)
+})
+
+//Decrementer la Taille de un(1)
+document.querySelector('#moins').addEventListener('click', ()=> {
+Taille -= 1
+if (Taille < 0) {
+Taille = 0
+document.querySelector('#taille').textContent = Taille;
+} else {
+document.querySelector('#taille').textContent = Taille
+console.log(Taille)}
+})
+
+//Incrementer la Taillede dix(10)
+document.querySelector('#plus10').addEventListener('click', ()=> {
+Taille += 10
+document.querySelector('#taille').textContent = Taille
+console.log(Taille)
+})
+
+//Decrementer la Taille de dix(10)
+document.querySelector('#moins10').addEventListener('click', ()=> {
+Taille -= 10;
+if (Taille < 0) {
+Taille = 0
+document.querySelector('#taille').textContent = Taille;
+} else {
+document.querySelector('#taille').textContent = Taille
+console.log(Taille)}
+})
+
+//Fonction pour Generer le Mot de Passe
+function Generer() {
+console.log(Taille);
+
+let mdp = []//liste qui va recuperer les Caracters du Mot de passe.
+
+for (i = 0; i <= Taille; i++) {
+if (Taille < 4) {
+document.getElementById('container').innerHTML = `<small style="font-size:10px; color:red"><i>Le mot de pass doit avoir au moins 4 caracters !</i></small>`
+} else {
+let chars = list[Math.floor(Math.random()*list.length)]
+//un chars est choisit au hasard dans la list(list) et ajouté à la list(mdp)
+mdp.push(chars);//ajout de chars
+console.log(mdp)
+
+let password = mdp.join('')// la list mdp est converti en String
+console.log(password)
+document.getElementById('container').innerHTML = `${password}`
+}
+}
+
+}
+</script>
+</body>
+</html>
